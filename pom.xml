@@ -61,13 +61,13 @@
                 <plugin>
                     <groupId>ua.versus</groupId>
                     <artifactId>BotVkMaven1</artifactId>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <mainClass>ru.bot.Bot</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
