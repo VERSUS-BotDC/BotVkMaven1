@@ -32,6 +32,8 @@ public class Bot {
 
         //bot.OpenSQL();
 
+        new Pinger("Start").start();
+
         while (true) {
             MessagesGetLongPollHistoryQuery historyQuery = vk.messages().getLongPollHistory(actor).ts(ts);
             List<Message> messages = historyQuery.execute().getMessages().getItems();
@@ -118,6 +120,30 @@ public class Bot {
 
 }
 
+
+class Pinger extends Thread {
+    String message;
+
+    public Pinger (String messag) {
+        message = messag;
+    }
+
+    public void run () {
+        while (true) {
+            try {
+                Document doc;
+                doc = Jsoup.connect("https://www.google.com/").get();
+                String site = doc.text();
+                System.out.println(site);
+                //site = "";
+                Thread.sleep(30000);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+}
+
 class MessageListener extends Thread {
     Message message;
 
@@ -153,6 +179,7 @@ class MessageListener extends Thread {
                             vk.messages().send(actor).message("Error").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
                         }
                     }
+
                     else if (message.getText().contains("!обновление")) {
                         Document doc;
                         try {
@@ -162,7 +189,7 @@ class MessageListener extends Thread {
                             String Version = doc.text();
                             vk.messages().send(actor).message("Последнее обновление "+Version+"\uD83D\uDE0F \n\n" +
                                     "Ссылка: " +UrlFK+"\n\n"+
-                                    "Если вышло новое напиши \n\"!обнови (Версию обновления)\" \uD83E\uDD73").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                                    "Если вышло новое обновление напиши \n\"!обнови (Версию обновления)\" \uD83E\uDD73").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
                         }catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -172,12 +199,22 @@ class MessageListener extends Thread {
                         vk.messages().send(actor).message("Сообщение об обновлении было отправлено администратору! \uD83E\uDD73").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
                         vk.messages().send(actor).message("Вышло обновление: "+ text + ". Отправитель: "+ message.getFromId()).userId(263889683).randomId(random.nextInt(10000)).execute();
                     }
+                    else if (message.getText().contains("!id")) {
+                        vk.messages().send(actor).message("Ваш id: " + message.getFromId()).userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                    }
 
                 }
                 else if (!bot.SerchSQL(message.getFromId()) && message.getFromId() != -208573536){
                     vk.messages().send(actor).message("Вы не покупали FastConnect!\uD83D\uDE09\n\n" +
                             "Для покупки напишите \"Хочу купить ФК\".\uD83D\uDE11 \nИ ожидайте ответа администратора.\uD83D\uDE05 \n\n" +
                             "Стоимость FastConnect 75р \uD83E\uDD29").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                }
+
+            }else {
+                if (message.getText().equals("Начать")) {
+                    vk.messages().send(actor).message("Приветствую! Напишите свой вопрос и ожидайте ответ администратора!\uD83E\uDD29").userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
+                }else if (message.getText().contains(".id")) {
+                    vk.messages().send(actor).message("Ваш id: " + message.getFromId()).userId(message.getFromId()).randomId(random.nextInt(10000)).execute();
                 }
             }
             bot.CloseSQL();
