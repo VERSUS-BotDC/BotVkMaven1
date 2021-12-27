@@ -53,9 +53,10 @@ public class Bot {
 
     void OpenSQL() {
         try {
-            co = DriverManager.getConnection(
-                    "jdbc:postgres://dokhdnmemiakpx:1ae7cfac3cf0b63f5743a298d3df45e5e2390c6f2cdfeafa2dd1ec3bf0d818a7@ec2-52-213-119-221.eu-west-1.compute.amazonaws.com:5432/d29bijkkdoiip9"
-            );
+            Class.forName("org.postgresql.Driver");
+            String urlB = System.getenv("jdbc:postgres://dokhdnmemiakpx:1ae7cfac3cf0b63f5743a298d3df45e5e2390c6f2cdfeafa2dd1ec3bf0d818a7@ec2-52-213-119-221.eu-west-1.compute.amazonaws.com:5432/d29bijkkdoiip9");
+
+            co = DriverManager.getConnection(urlB, "sa", "sa");
             System.out.println("Connected");
         }catch (Exception e) {
             System.out.println(e.getMessage());
