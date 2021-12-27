@@ -54,7 +54,7 @@ public class Bot {
     void OpenSQL() {
         try {
             co = DriverManager.getConnection(
-                    "jdbc:sqlite:C:\\Users\\Perfomans\\IdeaProjects\\BotVkMaven1\\src\\main\\java\\ru\\bot\\users.db"
+                    "jdbc:postgres://dokhdnmemiakpx:1ae7cfac3cf0b63f5743a298d3df45e5e2390c6f2cdfeafa2dd1ec3bf0d818a7@ec2-52-213-119-221.eu-west-1.compute.amazonaws.com:5432/d29bijkkdoiip9"
             );
             System.out.println("Connected");
         }catch (Exception e) {
