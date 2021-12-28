@@ -2,6 +2,7 @@ package ru.bot;
 
 
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 
@@ -18,10 +19,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 
+
 import java.sql.*;
 
 public class Bot {
     public static void main(String[] args) throws ClientException, ApiException, InterruptedException {
+
         TransportClient tranClien = new HttpTransportClient();
         VkApiClient vk = new VkApiClient(tranClien);
         Random random = new Random();
@@ -29,8 +32,8 @@ public class Bot {
         Integer ts =  vk.messages().getLongPollServer(actor).execute().getTs();
 
         Bot bot = new Bot();
-
         //bot.OpenSQL();
+
 
         new Pinger("Start").start();
 
