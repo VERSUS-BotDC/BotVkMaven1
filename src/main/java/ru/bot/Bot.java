@@ -138,9 +138,9 @@ class Pinger extends Thread {
                 Document doc;
                 doc = Jsoup.connect("https://www.google.com/").get();
                 String site = doc.text();
-                System.out.println(site);
+                System.out.println("Pinged Google");
                 //site = "";
-                Thread.sleep(30000);
+                Thread.sleep(10000);
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
