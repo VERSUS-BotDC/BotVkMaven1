@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
-
+import com.heroku.api.Dyno;
+import com.heroku.api.Heroku;
+import com.heroku.api.HerokuAPI;
+import com.heroku.sdk.deploy.util.HerokuCli;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.GroupActor;
@@ -136,7 +139,8 @@ class Restarter extends Thread {
         while (true) {
             try {
                 Thread.sleep(10000);
-               
+                HerokuAPI heroku = new HerokuAPI("6ddea597-cb42-45ec-8a6e-92c8008340e7");
+                heroku.restartDyno("vkbotfc", "worker.1");
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
