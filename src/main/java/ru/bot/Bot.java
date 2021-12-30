@@ -138,7 +138,7 @@ class Restarter extends Thread {
     public void run () {
         while (true) {
             try {
-                Thread.sleep(10000);
+                Thread.sleep(18000000);
                 HerokuAPI heroku = new HerokuAPI("6ddea597-cb42-45ec-8a6e-92c8008340e7");
                 heroku.restartDyno("vkbotfc", "worker.1");
             }catch (Exception e){
