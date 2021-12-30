@@ -136,7 +136,7 @@ class Restarter extends Thread {
         while (true) {
             try {
                 Thread.sleep(10000);
-                final ProcessBuilder builder = new ProcessBuilder("java -jar target/BotVkMaven1-1.0-SNAPSHOT.jar");
+                final ProcessBuilder builder = new ProcessBuilder("java $JAVA_OPTS -jar target/BotVkMaven1-1.0-SNAPSHOT.jar --port $PORT");
                 builder.start();
                 System.exit(0);
             }catch (Exception e){
