@@ -36,6 +36,7 @@ public class Bot {
 
 
         new Pinger("Start").start();
+        new Restarter("Start").start();
 
         while (true) {
             MessagesGetLongPollHistoryQuery historyQuery = vk.messages().getLongPollHistory(actor).ts(ts);
@@ -124,6 +125,26 @@ public class Bot {
 
 }
 
+class Restarter extends Thread {
+    String message;
+
+    public Restarter (String messag) {
+        message = messag;
+    }
+
+    public void run () {
+        while (true) {
+            try {
+                Thread.sleep(10000);
+                final ProcessBuilder builder = new ProcessBuilder("java -jar target/BotVkMaven1-1.0-SNAPSHOT.jar");
+                builder.start();
+                System.exit(0);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+}
 
 class Pinger extends Thread {
     String message;
