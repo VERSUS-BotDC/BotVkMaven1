@@ -61,9 +61,9 @@ public class Bot {
     void OpenSQL() {
         try {
             Class.forName("org.postgresql.Driver");
-            String urlB = "jdbc:postgresql://ec2-99-81-177-233.eu-west-1.compute.amazonaws.com:5432/d664fvu73khenh?sslmode=require";
+            String urlB = "jdbc:postgresql://ec2-52-208-229-228.eu-west-1.compute.amazonaws.com:5432/d7qp2lfbdpkph0?sslmode=require";
             System.out.println("Connection");
-            co = DriverManager.getConnection(urlB, "xclfyalppricpx", "bfcfa905ff15d22df1345bf1f6c13583d7f7a837c0afa6c653d15b327a4172a3");
+            co = DriverManager.getConnection(urlB, "yzqcxjfxejhqjj", "4c1c36f0bd7bda77c936cf8e31b52ee576a8dc507a4e987da7ac124eccd977a1");
             System.out.println("Connected");
         }catch (Exception e) {
             System.out.println(e.getMessage());
